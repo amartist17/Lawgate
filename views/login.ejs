@@ -18,6 +18,11 @@
     <link rel="shortcut icon" type="image/png" href="/dashboard/dist/images/logos/favicon.png" />
     <!-- Core Css -->
     <link  id="themeColors"  rel="stylesheet" href="/dashboard/dist/css/style.min.css" />
+    <style>
+      .hidden{
+        display: none;
+      }
+    </style>
   </head>
   <body>
     <!-- Preloader -->
@@ -57,14 +62,18 @@
                     <p class="mb-0 fs-4 px-3 d-inline-block bg-white text-dark z-index-5 position-relative">or sign in with</p>
                     <span class="border-top w-100 position-absolute top-50 start-50 translate-middle"></span>
                   </div> -->
-                  <form action="/dashboard/user-dashboard">
+                  <form class="login-form">
+                    <div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show hidden" role="alert">
+                      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+                      <strong>Incorrect - </strong> Email/Password
+                    </div>
                     <div class="mb-3">
-                      <label for="exampleInputEmail1" class="form-label">Username</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                      <label for="exampleInputEmail1" class="form-label">Email</label>
+                      <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                     </div>
                     <div class="mb-4">
                       <label for="exampleInputPassword1" class="form-label">Password</label>
-                      <input type="password" class="form-control" id="exampleInputPassword1">
+                      <input type="password" name="password" class="form-control" id="exampleInputPassword1">
                     </div>
                     <div class="d-flex align-items-center justify-content-between mb-4">
                       <div class="form-check">
@@ -100,6 +109,41 @@
     <script src="/dashboard/dist/js/sidebarmenu.js"></script>
     
     <script src="/dashboard/dist/js/custom.js"></script>
+
+    <script>
+      $(document).ready(function () {
+          $(".login-form").submit(function (event) {
+              event.preventDefault(); // Prevent the default form submission
+
+              // Serialize the form data
+              var formData = $(this).serialize();
+
+              $.ajax({
+                  type: "POST",
+                  url: "/api/login",
+                  data: formData,
+                  success: function (response) {
+                    console.log(response)
+                      // Check if the response is a success
+                      if (response.status == 200) {
+                          // Redirect to the dashboard on success
+                          window.location.href = "/dashboard/user-dashboard";
+                      } else {
+                          // Show the error message for 3 seconds
+                          $(".alert-danger").removeClass("hidden");
+                          setTimeout(function () {
+                              $(".alert-danger").addClass("hidden");
+                          }, 3000);
+                      }
+                  },
+                  error: function () {
+                      // Handle any AJAX errors here
+                      console.error("Error occurred during login.");
+                  }
+              });
+          });
+      });
+  </script>
   </body>
 
 </html>
