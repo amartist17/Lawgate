@@ -15,6 +15,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!--  Favicon -->
     <link rel="shortcut icon" type="image/png" href="/dashboard/dist/images/logos/favicon.png" />
+    <link rel="stylesheet" href="/dashboard/dist/libs/select2/dist/css/select2.min.css">
+
     <!-- Core Css -->
     <link  id="themeColors"  rel="stylesheet" href="/dashboard/dist/css/style.min.css" />
   </head>
@@ -74,43 +76,45 @@
           <div class="col-12">
             <div class="card">
               <div class="px-4 py-3 border-bottom">
-                <h5 class="card-title fw-semibold mb-0">State Your Message Here</h5>
+                <h5 class="card-title fw-semibold mb-0">Manage Groups</h5>
               </div>
               <div class="card-body p-4 border-bottom">
                 <!-- <h5 class="fs-4 fw-semibold mb-4">Account Details</h5> -->
-                <div class="row">
-                  <div class="col-lg-6">
-                    <div class="mb-4">
-                      <label for="exampleInputPassword1" class="form-label fw-semibold">Subject</label>
-                      <input type="text" class="form-control" id="exampleInputtext" placeholder="Electricity Problem">
-                    </div>
-                  </div>
-                  <div class="col-lg-6">
-                    <div class="mb-4">
-                      <label for="exampleInputPassword1" class="form-label fw-semibold">Address</label>
-                      <div class="input-group border rounded-1">
-                        <input type="text" class="form-control border-0" placeholder="Appartment Name - Room Number">
+                <form action="/api/admin/addBuilding" method="post" enctype="multipart/form-data">
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="mb-4">
+                        <label for="exampleInputPassword1" class="form-label fw-semibold">Name</label>
+                        <input type="text" class="form-control" id="exampleInputtext" placeholder="Name" name="name">
                       </div>
                     </div>
+                    <div class=" col-lg-6">
+                        <div class="mb-4">
+                            <label for="exampleInputPassword1" class="form-label fw-semibold">Select Buildings</label>
+                            <select
+                            class="select2 form-control"
+                            style="width: 100%; height: 36px"
+                            multiple
+                          >
+                            <option>Select</option>
+                              <option value="AK">Alaska</option>
+                              <option value="HI">Hawaii</option>
+                            
+                          </select>                      
+                        </div>          
                   </div>
                   <div class="col-lg-6">
                     <div class="mb-4">
-                      <label for="exampleInputPassword1" class="form-label fw-semibold">Message Type</label>
-                      <div class="input-group border rounded-1">
-                        <select class="form-select mr-sm-2" id="inlineFormCustomSelect">
-                          <option value="complaint">Complaint</option>
-                          <option value="enquiry">Enquiry</option>
-                          <option value="suggestion">Suggestion</option>
-                      </select>                            
+                      <label for="exampleInputPassword1" class="form-label fw-semibold">Color Code</label>
+                      <div class="form-group">
+                        <input type="color" class="form-control " id="exampleColorInput" value="#563d7c" title="Choose your color">
                     </div>
-                    </div>
-                  </div>
-                  <div class="mb-4">
-                      <label for="exampleInputPassword1" class="form-label fw-semibold">Message</label>
-                      <textarea class="form-control p-7" name="" id="" cols="20" rows="1" placeholder="Hi, can you send an electrician "></textarea>
-                  </div>
-                    <Button class="btn btn-primary">Send</Button>
                 </div>
+                  </div>
+                  
+                      <button class="btn btn-primary">Send</button>
+                  </div>
+                </form>
               </div>
               
             </div>
@@ -229,6 +233,10 @@
     <!-- current page js files -->
     <script src="/dashboard/dist/libs/apexcharts/dist/apexcharts.min.js"></script>
     <script src="/dashboard/dist/js/dashboard5.js"></script>
-  </body>
+    <script src="/dashboard/dist/libs/select2/dist/js/select2.full.min.js"></script>
+    <script src="/dashboard/dist/libs/select2/dist/js/select2.min.js"></script>
+    <script src="/dashboard/dist/js/forms/select2.init.js"></script>
+
+</body>
 
 </html>

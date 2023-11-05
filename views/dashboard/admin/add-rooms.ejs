@@ -15,9 +15,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!--  Favicon -->
     <link rel="shortcut icon" type="image/png" href="/dashboard/dist/images/logos/favicon.png" />
+    
+    <link rel="stylesheet" href="/dashboard/dist/libs/select2/dist/css/select2.min.css">
+
+
     <!-- Core Css -->
     <link  id="themeColors"  rel="stylesheet" href="/dashboard/dist/css/style.min.css" />
-  </head>
+  
+</head>
   <body>
     <!-- Preloader -->
     <div class="preloader">
@@ -71,46 +76,59 @@
         <div class="container-fluid">
           <%- include('components/banner-others') %>
         <div class="row"> 
-          <div class="col-12">
+          <div class="col-8">
             <div class="card">
               <div class="px-4 py-3 border-bottom">
-                <h5 class="card-title fw-semibold mb-0">State Your Message Here</h5>
+                <h5 class="card-title fw-semibold mb-0">Add Rooms To Your Building</h5>
+                
               </div>
               <div class="card-body p-4 border-bottom">
                 <!-- <h5 class="fs-4 fw-semibold mb-4">Account Details</h5> -->
-                <div class="row">
-                  <div class="col-lg-6">
-                    <div class="mb-4">
-                      <label for="exampleInputPassword1" class="form-label fw-semibold">Subject</label>
-                      <input type="text" class="form-control" id="exampleInputtext" placeholder="Electricity Problem">
+                <form action="/api/admin/addRooms" method="post" enctype="multipart/form-data">
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <div class="mb-4">
+                        <label for="exampleInputPassword1" class="form-label fw-semibold">Select Building</label>
+                        <select
+                        class="select2 form-control"
+                        style="width: 100%; height: 36px"
+                      >
+                        <option>Select</option>
+                          <option value="AK">Alaska</option>
+                          <option value="HI">Hawaii</option>
+                        
+                      </select>                      
                     </div>
-                  </div>
-                  <div class="col-lg-6">
-                    <div class="mb-4">
-                      <label for="exampleInputPassword1" class="form-label fw-semibold">Address</label>
-                      <div class="input-group border rounded-1">
-                        <input type="text" class="form-control border-0" placeholder="Appartment Name - Room Number">
+                      <div class="inputs-container">
+                      <div class="input-group" id="original">
+                          <span class="input-group-text">RoomNo.,Rent,Security</span>
+                          <input type="text" class="form-control">
+                          <input type="text" class="form-control">
+                          <input type="text" class="form-control">
+                          <button id="add-btn" type="button" class="btn btn-primary add-room">+</button>
+
+                        </div>
                       </div>
+                      
+                    <!-- <div class="mb-4">
+                    <label for="exampleInputPassword1" class="form-label fw-semibold">Description</label>
+                    <textarea class="form-control p-7" name="description" id="" cols="20" rows="1" placeholder="Enter Rooms"></textarea>
+                    <small id="textHelp" class="badge badge-default text-info font-small bg-light-info form-text">Add rooms like <br> 10@6000&3000 this will add 10 rooms with 6000rs rent and 3000rs security</small>
+                    
+                </div> -->
+                
+                <div class="ms-auto mt-3 mt-md-3">
+                  <button type="submit" class="btn btn-info font-medium rounded-pill px-4">
+                    <div class="d-flex align-items-center">
+                      <i class="ti ti-send me-2 fs-4"></i>
+                      Submit
                     </div>
-                  </div>
-                  <div class="col-lg-6">
-                    <div class="mb-4">
-                      <label for="exampleInputPassword1" class="form-label fw-semibold">Message Type</label>
-                      <div class="input-group border rounded-1">
-                        <select class="form-select mr-sm-2" id="inlineFormCustomSelect">
-                          <option value="complaint">Complaint</option>
-                          <option value="enquiry">Enquiry</option>
-                          <option value="suggestion">Suggestion</option>
-                      </select>                            
-                    </div>
-                    </div>
-                  </div>
-                  <div class="mb-4">
-                      <label for="exampleInputPassword1" class="form-label fw-semibold">Message</label>
-                      <textarea class="form-control p-7" name="" id="" cols="20" rows="1" placeholder="Hi, can you send an electrician "></textarea>
-                  </div>
-                    <Button class="btn btn-primary">Send</Button>
+                  </button>
                 </div>
+
+                </div>
+                  </div>
+                </form>
               </div>
               
             </div>
@@ -229,6 +247,30 @@
     <!-- current page js files -->
     <script src="/dashboard/dist/libs/apexcharts/dist/apexcharts.min.js"></script>
     <script src="/dashboard/dist/js/dashboard5.js"></script>
+    <script src="/dashboard/dist/libs/select2/dist/js/select2.full.min.js"></script>
+    <script src="/dashboard/dist/libs/select2/dist/js/select2.min.js"></script>
+    <script src="/dashboard/dist/js/forms/select2.init.js"></script>
+
+    <script>
+      $(document).ready(function () {
+          $('.add-room').click(function () {
+              // Clone the original input-group
+              let original = $('#original')
+              var clonedInputGroup = original.clone(true, true);
+              original.removeAttr('id');
+            // alert("hi")
+            //   // Remove the ID from the cloned input-group to avoid duplicate IDs
+            //   clonedInputGroup
+              // Append the cloned input-group to the container
+              $('.inputs-container').append(clonedInputGroup);
+              $('.add-room').not('.add-room:last').remove();
+              
+
+              // Move the + button to the last added duplication
+              
+          });
+      });
+  </script>
   </body>
 
 </html>

@@ -74,43 +74,156 @@
           <div class="col-12">
             <div class="card">
               <div class="px-4 py-3 border-bottom">
-                <h5 class="card-title fw-semibold mb-0">State Your Message Here</h5>
+                <h5 class="card-title fw-semibold mb-0">Add Your Building</h5>
               </div>
               <div class="card-body p-4 border-bottom">
                 <!-- <h5 class="fs-4 fw-semibold mb-4">Account Details</h5> -->
-                <div class="row">
-                  <div class="col-lg-6">
-                    <div class="mb-4">
-                      <label for="exampleInputPassword1" class="form-label fw-semibold">Subject</label>
-                      <input type="text" class="form-control" id="exampleInputtext" placeholder="Electricity Problem">
-                    </div>
-                  </div>
-                  <div class="col-lg-6">
-                    <div class="mb-4">
-                      <label for="exampleInputPassword1" class="form-label fw-semibold">Address</label>
-                      <div class="input-group border rounded-1">
-                        <input type="text" class="form-control border-0" placeholder="Appartment Name - Room Number">
+                <form action="/api/admin/addBuilding" method="post" enctype="multipart/form-data">
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="mb-4">
+                        <label for="exampleInputPassword1" class="form-label fw-semibold">Name</label>
+                        <input type="text" class="form-control" id="exampleInputtext" placeholder="Name" name="name">
                       </div>
                     </div>
+                    <div class=" col-lg-6">
+                      <div class="mb-4">
+                      <label for="exampleInputPassword1" class="form-label fw-semibold">Images</label>
+                      <input class="form-control" type="file" id="formFile" name="images" multiple>
+                    </div>
                   </div>
                   <div class="col-lg-6">
                     <div class="mb-4">
-                      <label for="exampleInputPassword1" class="form-label fw-semibold">Message Type</label>
-                      <div class="input-group border rounded-1">
-                        <select class="form-select mr-sm-2" id="inlineFormCustomSelect">
-                          <option value="complaint">Complaint</option>
-                          <option value="enquiry">Enquiry</option>
-                          <option value="suggestion">Suggestion</option>
-                      </select>                            
-                    </div>
+                      <label for="exampleInputPassword1" class="form-label fw-semibold">Owner</label>
+                      <input type="text" class="form-control" id="exampleInputtext" placeholder="Owner's name" name="owner">
                     </div>
                   </div>
-                  <div class="mb-4">
-                      <label for="exampleInputPassword1" class="form-label fw-semibold">Message</label>
-                      <textarea class="form-control p-7" name="" id="" cols="20" rows="1" placeholder="Hi, can you send an electrician "></textarea>
+                  <div class="col-lg-6">
+                    <div class="mb-4">
+                      <label for="exampleInputPassword1" class="form-label fw-semibold">Caretaker</label>
+                      <input type="text" class="form-control" id="exampleInputtext" placeholder="Caretaker's name" name="caretaker">
+                    </div>
                   </div>
-                    <Button class="btn btn-primary">Send</Button>
+                    <div class=" col-lg-6">
+                      <div class="mb-4">
+                      <label for="exampleInputPassword1" class="form-label fw-semibold">Address</label>
+                      <textarea class="form-control p-7" name="address" id="" cols="20" rows="1" placeholder="Appartment Name - City - State - Country"></textarea>
+                      </div>
+                  </div>
+                  <div class=" col-lg-6">
+                    <div class="mb-4">
+                    <label for="exampleInputPassword1" class="form-label fw-semibold">Description</label>
+                    <textarea class="form-control p-7" name="description" id="" cols="20" rows="1" placeholder="Enter Description"></textarea>
+                    </div>
                 </div>
+                <div class="col-lg-6">
+                  <button
+                          class="btn me-1 mb-1 btn-outline-primary btn-lg px-4 fs-4 font-medium"
+                          data-bs-toggle="modal"
+                          data-bs-target="#bs-example-modal-md"
+                          type="button"
+                        >
+                          Add Rooms
+                  </button>
+                        <!-- sample modal content -->
+                        <div
+                          class="modal fade"
+                          id="bs-example-modal-md"
+                          tabindex="-1"
+                          aria-labelledby="bs-example-modal-md"
+                          aria-hidden="true"
+                          data-bs-backdrop="static" data-bs-keyboard="false" 
+                        >
+                          <div class="modal-dialog modal-md">
+                            <div class="modal-content">
+                              <div
+                                class="modal-header d-flex align-items-center"
+                              >
+                                <h4 class="modal-title" id="myLargeModalLabel">
+                                  Add Rooms
+                                </h4>
+                                <button
+                                  type="button"
+                                  class="btn-close"
+                                  data-bs-dismiss="modal"
+                                  aria-label="Close"
+                                ></button>
+                              </div>
+                              <div class="modal-body">
+                                <div class="row"> 
+                                  <div class="col-12">
+                                    <div class="card">
+                                      <div class="px-4 py-3 border-bottom row">
+                                        <h5 class="card-title fw-semibold mb-0 col-8">Add Rooms To Your Building</h5>
+                                        <div class="add-button-group col-4">
+                                          <button type="button" class="btn mb-1 btn-secondary btn-circle total-rooms">
+                                            1
+                                          </button>
+                                          <button id="add-btn" type="button" class="btn btn-primary add-room ">+</button>
+                                        </div>
+
+                                      </div>
+                                      <div class="card-body p-4 border-bottom">
+                                        <!-- <h5 class="fs-4 fw-semibold mb-4">Account Details</h5> -->
+                                          <div class="row">
+                                            <div class="col-lg-12">
+                                              
+                                              <div class="inputs-container">
+                                              <div class="input-group" id="original">
+                                                  <span class="input-group-text">RoomNo.,Rent,Security</span>
+                                                  <input type="text" class="form-control">
+                                                  <input type="text" class="form-control">
+                                                  <input type="text" class="form-control">
+                                                  <!-- <button id="add-btn" type="button" class="btn btn-primary add-room">+</button> -->
+                        
+                                                </div>
+                                              </div>
+                                              
+                                            <!-- <div class="mb-4">
+                                            <label for="exampleInputPassword1" class="form-label fw-semibold">Description</label>
+                                            <textarea class="form-control p-7" name="description" id="" cols="20" rows="1" placeholder="Enter Rooms"></textarea>
+                                            <small id="textHelp" class="badge badge-default text-info font-small bg-light-info form-text">Add rooms like <br> 10@6000&3000 this will add 10 rooms with 6000rs rent and 3000rs security</small>
+                                            
+                                        </div> -->
+                                        
+                                        <!-- <div class="ms-auto mt-3 mt-md-3">
+                                          <button type="submit" class="btn btn-info font-medium rounded-pill px-4">
+                                            <div class="d-flex align-items-center">
+                                              <i class="ti ti-send me-2 fs-4"></i>
+                                              Submit
+                                            </div>
+                                          </button>
+                                        </div> -->
+                        
+                                        </div>
+                                          </div>
+                                        
+                                      </div>
+                                      
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button
+                                  type="button"
+                                  class="btn btn-primary  font-medium waves-effect text-start"
+                                  data-bs-dismiss="modal"
+                                >
+                                  Add
+                                </button>
+                              </div>
+                            </div>
+                            <!-- /.modal-content -->
+                          </div>
+                          <!-- /.modal-dialog -->
+                        </div>
+                
+
+                  <button class="btn btn-primary btn-lg px-4 fs-4 font-medium mb-1" type="submit">Submit</button>
+                </div>
+                  </div>
+                </form>
               </div>
               
             </div>
@@ -229,6 +342,33 @@
     <!-- current page js files -->
     <script src="/dashboard/dist/libs/apexcharts/dist/apexcharts.min.js"></script>
     <script src="/dashboard/dist/js/dashboard5.js"></script>
+    <script src="/dashboard/dist/libs/select2/dist/js/select2.full.min.js"></script>
+    <script src="/dashboard/dist/libs/select2/dist/js/select2.min.js"></script>
+    <script src="/dashboard/dist/js/forms/select2.init.js"></script>
+
+    <script>
+      $(document).ready(function () {
+          $('.add-room').click(function () {
+              // Clone the original input-group
+              let original = $('#original')
+              var clonedInputGroup = original.clone(true, true);
+              original.removeAttr('id');
+              var totalRooms = parseInt($('.total-rooms').text());
+              totalRooms++;
+              $('.total-rooms').text(totalRooms);
+            // alert("hi")
+            //   // Remove the ID from the cloned input-group to avoid duplicate IDs
+            //   clonedInputGroup
+              // Append the cloned input-group to the container
+              $('.inputs-container').append(clonedInputGroup);
+              // $('.add-room').not('.add-room:last').remove();
+              
+
+              // Move the + button to the last added duplication
+              
+          });
+      });
+  </script>
   </body>
 
 </html>

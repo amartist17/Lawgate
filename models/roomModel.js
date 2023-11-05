@@ -1,12 +1,9 @@
 const mongoose = require("mongoose");
-const validator = require("validator");
-const bcrypt = require("bcryptjs");
-const crypto = require("crypto");
 
 const roomSchema = new mongoose.Schema({
-  pg: {
+  building: {
     type: mongoose.Schema.ObjectId,
-    ref: "PG",
+    ref: "Building",
   },
   rent:{
     type: Number,
@@ -14,17 +11,17 @@ const roomSchema = new mongoose.Schema({
   },
   securityAmount:{
     type: Number,
-    required: [true, "Please enter a rent amount"],
+    required: [true, "Please enter a security amount"],
   },
   rentLeft:{
     type: Number,
   },
-  images:[
-    {type: String}
-  ],
-  description:{
-    type: String,
-  },
+  // images:[
+  //   {type: String}
+  // ],
+  // description:{
+  //   type: String,
+  // },
   securityLeft:{
     type: Number,
   },
@@ -35,14 +32,13 @@ const roomSchema = new mongoose.Schema({
     type: mongoose.Schema.ObjectId,
     ref: "User",
   },
-  owner: 
-    {
-      type: mongoose.Schema.ObjectId,
-      ref: "User",
-    },
   createdBy:{
     type: mongoose.Schema.ObjectId,
     ref: "User",
+  },
+  date: {
+    type: Date,
+    default: Date.now,
   },
     
   //   passwordChangedAt: Date,

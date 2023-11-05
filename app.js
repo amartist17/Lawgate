@@ -7,9 +7,11 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+const upload = require("express-fileupload"); 
+app.use(upload());
+
 const cookieParser = require("cookie-parser");
 app.use(cookieParser());
-
 
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "static")));

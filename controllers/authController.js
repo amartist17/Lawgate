@@ -123,6 +123,7 @@ exports.restrictTo = (...roles) => {
     next();
   };
 };
+
 exports.isLoggedIn = catchAsync(async (req, res, next) => {
   // 1) Token exists?
   if (req.cookies.jwt) {

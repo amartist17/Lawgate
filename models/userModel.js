@@ -59,6 +59,10 @@ const userSchema = new mongoose.Schema({
     
   ,
   otp: String,
+  date: {
+    type: Date,
+    default: Date.now,
+  },
 
   //   passwordChangedAt: Date,
   // passwordResetToken: String,

@@ -127,7 +127,12 @@
                       // Check if the response is a success
                       if (response.status == 200) {
                           // Redirect to the dashboard on success
-                          window.location.href = "/dashboard/user-dashboard";
+                          console.log(response)
+                          if(response.data.user.role == 'user'){
+                            window.location.href = "/dashboard/user-dashboard";
+                          }else{
+                            window.location.href = "/dashboard/admin-dashboard";
+                          }
                       } else {
                           // Show the error message for 3 seconds
                           $(".alert-danger").removeClass("hidden");

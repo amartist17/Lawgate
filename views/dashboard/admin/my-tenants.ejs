@@ -16,6 +16,9 @@
     <!--  Favicon -->
     <link rel="shortcut icon" type="image/png" href="/dashboard/dist/images/logos/favicon.png" />
     <!-- Core Css -->
+    <link href="https://cdn.datatables.net/v/dt/dt-1.13.6/datatables.min.css" rel="stylesheet">
+
+
     <link  id="themeColors"  rel="stylesheet" href="/dashboard/dist/css/style.min.css" />
   </head>
   <body>
@@ -43,14 +46,14 @@
             </div>
           </div>
           <!-- Sidebar navigation-->
-         <%- include('components/sidenav') %>
+          <%- include('components/sidenav') %>
           <div class="fixed-profile p-3 bg-light-secondary rounded sidebar-ad mt-3">
             <div class="hstack gap-3">
               <div class="john-img">
                 <img src="/dashboard/dist/images/profile/user-1.jpg" class="rounded-circle" width="40" height="40" alt="">
               </div>
               <div class="john-title">
-                <h6 class="mb-0 fs-4 fw-semibold">Mathew</h6>
+                <h6 class="mb-0 fs-4 fw-semibold">Ajay</h6>
                 <span class="fs-2 text-dark">Designer</span>
               </div>
               <button class="border-0 bg-transparent text-primary ms-auto" tabindex="0" type="button" aria-label="logout" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="logout">
@@ -69,61 +72,138 @@
         <%- include('components/header') %>
         <!-- Header End -->
         <div class="container-fluid">
-          <%- include('components/banner-others') %>
-        <div class="row"> 
-          <div class="col-12">
-            <div class="card">
-              <div class="px-4 py-3 border-bottom">
-                <h5 class="card-title fw-semibold mb-0">State Your Message Here</h5>
-              </div>
-              <div class="card-body p-4 border-bottom">
-                <!-- <h5 class="fs-4 fw-semibold mb-4">Account Details</h5> -->
-                <div class="row">
-                  <div class="col-lg-6">
-                    <div class="mb-4">
-                      <label for="exampleInputPassword1" class="form-label fw-semibold">Subject</label>
-                      <input type="text" class="form-control" id="exampleInputtext" placeholder="Electricity Problem">
-                    </div>
-                  </div>
-                  <div class="col-lg-6">
-                    <div class="mb-4">
-                      <label for="exampleInputPassword1" class="form-label fw-semibold">Address</label>
-                      <div class="input-group border rounded-1">
-                        <input type="text" class="form-control border-0" placeholder="Appartment Name - Room Number">
+            <div class="row">
+                <%- include('components/banner-others') %>
+                <!-- <div class="col-sm-6 col-lg-2 d-flex align-items-stretch">
+                    <div class="card w-100">
+                      <div class="card-body p-4">
+                        <h4 class="fw-semibold">$10,230</h4>
+                        <p class="mb-2 fs-3">Expense</p>
+                        <div id="expense"></div>
                       </div>
                     </div>
                   </div>
-                  <div class="col-lg-6">
-                    <div class="mb-4">
-                      <label for="exampleInputPassword1" class="form-label fw-semibold">Message Type</label>
-                      <div class="input-group border rounded-1">
-                        <select class="form-select mr-sm-2" id="inlineFormCustomSelect">
-                          <option value="complaint">Complaint</option>
-                          <option value="enquiry">Enquiry</option>
-                          <option value="suggestion">Suggestion</option>
-                      </select>                            
+                  <div class="col-sm-6 col-lg-2 d-flex align-items-stretch">
+                    <div class="card w-100">
+                      <div class="card-body p-4">
+                        <h4 class="fw-semibold">$65,432</h4>
+                        <p class="mb-1 fs-3">Sales</p>
+                        <div id="sales" class="sales-chart"></div>
+                      </div>
                     </div>
-                    </div>
-                  </div>
-                  <div class="mb-4">
-                      <label for="exampleInputPassword1" class="form-label fw-semibold">Message</label>
-                      <textarea class="form-control p-7" name="" id="" cols="20" rows="1" placeholder="Hi, can you send an electrician "></textarea>
-                  </div>
-                    <Button class="btn btn-primary">Send</Button>
-                </div>
-              </div>
-              
+                  </div> -->
             </div>
-          </div>
-        </div>
+        <div class="row">
+
+            <div class="col-12">
+                <!-- ---------------------
+                            start File export
+                        ---------------- -->
+                <div class="row">
+                  <div class="col-9"></div>
+                    <div class="col-3">
+                        <ul class="nav nav-tabs nav-fill" role="tablist">
+                            <li class="nav-item" role="presentation">
+                              <a class=" btn btn-primary"  href="/dashboard/admin-dashboard/add-tenant"  aria-selected="true">
+                                <span><i class="ti ti-pencil-plus fs-4 me-2"></i>Add</span>
+                              </a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                              <a class=" btn btn-info"  href="/dashboard/admin-dashboard/manage-property"  aria-selected="false" tabindex="-1">
+                                <span><i class="ti ti-edit fs-4 me-2"></i>Manage</span>
+                              </a>
+                            </li>
+                          </ul>
+                    </div>
+                    
+                </div>
+                <div class="card">
+                  <div class="card-body">
+                    <div class="mb-2">
+                      <h5 class="mb-0">Tenants</h5>
+                    </div>
+                   
+                    <div class="table-responsive">
+                      <table
+                        id="orders-table" data-page-length='10'
+                        class="table border table-striped table-bordered display text-nowrap"
+                        >
+                        <thead>
+                          <!-- start row -->
+                          <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Address</th>
+                            <th>Rent</th>
+                            <th>Rent Balance</th>
+                            <th>Electricity Balance</th>
+                            <th>Security</th>
+                          </tr>
+                          <!-- end row -->
+                        </thead>
+                        <tbody>
+                          <!-- start row -->
+                          <tr>
+                           <td>123456</td>
+                           <td>Ajay</td>
+                           <td>Subhraag Apartment <br> 201</td>
+                           <td>12000</td>
+                           <td>0</td>
+                           <td>1200 Rs</td>
+                           <td>10000 Rs</td>
+                          </tr>
+                          <tr>
+                            <td>123456</td>
+                            <td>Ajay</td>
+                            <td>Subhraag Apartment <br> 201</td>
+                            <td>12000</td>
+                            <td>0</td>
+                            <td>1200 Rs</td>
+                            <td>10000 Rs</td>
+                           </tr>
+                           <tr>
+                            <td>123456</td>
+                            <td>Ajay</td>
+                            <td>Subhraag Apartment <br> 201</td>
+                            <td>12000</td>
+                            <td>0</td>
+                            <td>1200 Rs</td>
+                            <td>10000 Rs</td>
+                           </tr>
+                          
+                          <!-- end row -->
+                   
+                        </tbody>
+                        <tfoot>
+                          <!-- start row -->
+                          <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Address</th>
+                            <th>Rent</th>
+                            <th>Rent Balance</th>
+                            <th>Electricity Balance</th>
+                            <th>Security</th>
+                          </tr>
+                          <!-- end row -->
+                        </tfoot>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <!-- ---------------------
+                            end File export
+                        ---------------- -->
+              </div>
+              </div>
       </div>
     </div>
     <!--  Shopping Cart -->
-   
+    
     <!--  Mobilenavbar -->
     
     <!-- Search Bar -->
-   
+    
     <!-- Customizer -->
    <button class="btn btn-primary p-3 rounded-circle d-flex align-items-center justify-content-center customizer-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
     <i class="ti ti-settings fs-7" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Settings"></i>
@@ -228,7 +308,26 @@
     <script src="/dashboard/dist/js/custom.js"></script>
     <!-- current page js files -->
     <script src="/dashboard/dist/libs/apexcharts/dist/apexcharts.min.js"></script>
-    <script src="/dashboard/dist/js/dashboard5.js"></script>
+    <script src="/dashboard/dist/js/dashboard2.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/v/zf/jszip-3.10.1/dt-1.13.6/b-2.4.2/b-colvis-2.4.2/b-html5-2.4.2/b-print-2.4.2/cr-1.7.0/r-2.5.0/datatables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/js/foundation.min.js"></script>
+   
+    <script>
+      $(document).ready( function () {
+    $('#orders-table').DataTable({
+      // responsive: true,
+      dom: 'Bfrtip',
+      buttons: [
+      'copy', 'excel', 'pdf'
+    ],
+    pagingType: 'first_last_numbers'
+    });
+    $(".buttons-copy, .buttons-csv, .buttons-print, .buttons-pdf, .buttons-excel"
+).addClass("btn btn-primary mr-1");
+} );
+    </script>
   </body>
 
 </html>
