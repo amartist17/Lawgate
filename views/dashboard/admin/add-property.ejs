@@ -171,9 +171,9 @@
                                               <div class="inputs-container">
                                               <div class="input-group" id="original">
                                                   <span class="input-group-text">RoomNo.,Rent,Security</span>
-                                                  <input type="text" class="form-control">
-                                                  <input type="text" class="form-control">
-                                                  <input type="text" class="form-control">
+                                                  <input name="roomNum" type="text" class="form-control">
+                                                  <input name="rent" class="form-control">
+                                                  <input name="security" class="form-control">
                                                   <!-- <button id="add-btn" type="button" class="btn btn-primary add-room">+</button> -->
                         
                                                 </div>
@@ -367,7 +367,35 @@
               // Move the + button to the last added duplication
               
           });
+      
+          $('form').on('submit', function(event) {
+      event.preventDefault(); // Prevent the default form submission
+
+      var formData = new FormData(this);
+
+      $.ajax({
+        url: '/api/admin/addProperty',
+        type: 'POST',
+        data: formData,
+        contentType: false, // Required for 'multipart/form-data'
+        processData: false, // Required for 'multipart/form-data'
+        success: function(response) {
+          if (response.status === 200) {
+            alert('Added successfully');
+          } else {
+            alert('Error occurred');
+          }
+        },
+        error: function() {
+          alert('Error occurred');
+        }
       });
+    });
+        });
+  
+     
+</script>
+
   </script>
   </body>
 

@@ -5,11 +5,16 @@ const roomSchema = new mongoose.Schema({
     type: mongoose.Schema.ObjectId,
     ref: "Building",
   },
+  roomNumber:{
+    type: String,
+    required: [true, "Please enter a room number"],
+
+  },
   rent:{
     type: Number,
     required: [true, "Please enter a rent amount"],
   },
-  securityAmount:{
+  security:{
     type: Number,
     required: [true, "Please enter a security amount"],
   },

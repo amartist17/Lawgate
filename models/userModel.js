@@ -37,6 +37,16 @@ const userSchema = new mongoose.Schema({
       message: "Passwords don't match",
     },
   },
+  phoneNumber: {
+    type: [String], // Define the property as an array of strings
+    validate: {
+      validator: function(phoneNumbers) {
+        // Use every() to check each phone number in the array
+        return phoneNumbers.every((number) => /^\d{10}$/.test(number));
+      },
+      message: 'All phone numbers must be 10-digit numbers.',
+    },
+  },  
   room: 
     {
       type: mongoose.Schema.ObjectId,

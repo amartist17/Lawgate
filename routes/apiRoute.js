@@ -8,8 +8,9 @@ router.post("/signup", authController.signup);
 router.post("/login", authController.login);
 router.get("/logout", authController.logout);
 
+router.use(authController.isLoggedIn);
 
-router.post("/admin/addProperty", apiController.addProperty);
+router.post("/admin/addProperty",authController.restrictTo('admin'), apiController.addProperty);
 
 module.exports = router;
 

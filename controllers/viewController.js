@@ -1,3 +1,4 @@
+const Properties = require('../models/propertyModel');
 exports.home = async (req, res, next) => {
   res.status(200).render("index");
 };
@@ -43,7 +44,8 @@ exports.adminDashboard = async (req, res, next) => {
 };
 
 exports.myProperties = async (req, res, next) => {
-  res.status(200).render('dashboard/admin/my-properties',{title: "My Property"});
+  let properties = await Properties.find({createdBy: req.user})
+  res.status(200).render('dashboard/admin/my-properties',{title: "My Property", properties});
 };
 
 exports.myTenants = async (req, res, next) => {

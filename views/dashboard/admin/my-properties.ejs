@@ -141,34 +141,18 @@
                         </thead>
                         <tbody>
                           <!-- start row -->
-                          <tr>
-                           <td>Subhraag Apartment</td>
-                           <td>Lorem, ipsum dolor.</td>
-                           <td>15</td>
-                           <td>Sahil</td>
-                           <td><%= 15*10000 %>Rs</td>
-                          </tr>
-                          <tr>
-                            <td>Subhraag Apartment</td>
-                            <td>Lorem, ipsum dolor.</td>
-                            <td>15</td>
-                            <td>Sahil</td>
-                            <td><%= 15*10000 %>Rs</td>
-                           </tr>
-                           <tr>
-                            <td>Subhraag Apartment</td>
-                            <td>Lorem, ipsum dolor.</td>
-                            <td>15</td>
-                            <td>Sahil</td>
-                            <td><%= 15*10000 %>Rs</td>
-                           </tr>
-                           <tr>
-                            <td>Subhraag Apartment</td>
-                            <td>Lorem, ipsum dolor.</td>
-                            <td>15</td>
-                            <td>Sahil</td>
-                            <td><%= 15*10000 %>Rs</td>
-                           </tr>
+                          <% properties.map(property=>{ %>
+                            <tr>
+                              <td><%= property.name %></td>
+                              <td><%= property.address %></td>
+                              <td><%= property.rooms.length %></td>
+                              <td><%= property.caretaker %></td>
+                              
+                              <td><%= property.revenue %>Rs</td>
+                             </tr>
+                          <% }) %>
+                          
+                          
                           <!-- end row -->
                    
                         </tbody>
